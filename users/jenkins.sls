@@ -8,7 +8,7 @@ jenkins:
     - gid: 5000
     - groups:
       - wheel
-	  - jenkins
+      - jenkins
     - empty_password: True
   ssh_auth.present:
     - user: jenkins

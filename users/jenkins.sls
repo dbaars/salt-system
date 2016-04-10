@@ -5,10 +5,10 @@ jenkins:
   user.present:
     - fullname: Jenkins CI
     - shell: /bin/bash
-    - uid: 5000
     - gid: 5000
     - groups:
       - wheel
+      - jenkins
     - empty_password: True
   ssh_auth.present:
     - user: jenkins

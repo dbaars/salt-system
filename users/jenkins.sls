@@ -1,11 +1,11 @@
 jenkins:
   group.present:
     - name: jenkins
-    - gid: 5000
+    - gid: 1001
   user.present:
     - fullname: Jenkins CI
     - shell: /bin/bash
-    - gid: 5000
+    - gid: 1001
     - groups:
       - wheel
       - jenkins

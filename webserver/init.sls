@@ -20,4 +20,5 @@ httpd:
 public:
   firewalld.present:
     - name: public
-    - add_service: http
+    - services:
+      - http

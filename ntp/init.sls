@@ -3,6 +3,8 @@ ntp:
   pkg.installed: []
   service.running:
     - name: ntpd
+    - watch:
+      - file: /etc/ntp.conf
     - require:
       - pkg: ntp
 

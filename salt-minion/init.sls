@@ -11,7 +11,7 @@ salt-minion:
 # We want to manage the /etc/salt/minion file
 /etc/salt/minion:
   file.managed:
-    - source: salt://minion/minion.template
+    - source: salt://salt-minion/minion.template
     - template: jinja
     - mode: 640
     - user: root

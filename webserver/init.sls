@@ -24,10 +24,9 @@ public:
       - http
 
 # What this means is that the service.running state will look for changes to the firewalld.present state 
-# and reload firewalld if changes occur
+# and restart firewalld if changes occur
 
 firewalld:
   service.running:
-    - reload: True
     - watch:
       - firewalld: public

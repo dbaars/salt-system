@@ -8,12 +8,12 @@ httpd:
 
 # manage index.html
 
-/var/www/index.html:                        # ID declaration
-  file:                                     # state declaration
-    - managed                               # function
-    - source: salt://webserver/index.html   # function arg
-    - require:                              # requisite declaration
-      - pkg: httpd                          # requisite reference
+/var/www/index.html:
+  file:
+    - managed
+    - source: salt://webserver/index.html
+    - require:
+      - pkg: httpd
 
 # Open firewall ports for http
 
@@ -22,3 +22,12 @@ public:
     - name: public
     - services:
       - http
+
+# What this means is that the service.running state will look for changes to the firewalld.present state 
+# and reload firewalld if changes occur
+
+firewalld:
+  service.running:
+    - reload: True
+    - watch:
+      - firewalld: public

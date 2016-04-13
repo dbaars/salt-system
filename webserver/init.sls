@@ -8,12 +8,15 @@ httpd:
 
 # manage index.html
 
-/var/www/index.html:
+/var/www/html/index.html:
   file:
     - managed
     - source: salt://webserver/index.html
     - require:
       - pkg: httpd
+    - mode: 644
+    - user: apache
+    - group: apache
 
 # Open firewall ports for http
 

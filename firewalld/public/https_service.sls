@@ -11,5 +11,6 @@ public_https:
 
 firewalld_check_https:
   service.running:
+    - name: firewalld
     - watch:
       - firewalld: public

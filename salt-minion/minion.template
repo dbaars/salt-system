@@ -675,7 +675,7 @@
 ############################################
 
 # Set master server
-master: saltest.niwa.local
+master: saltdev.niwa.local
 
 # Set log file location
 log_file: /var/log/salt/minion

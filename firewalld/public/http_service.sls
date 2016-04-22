@@ -9,7 +9,7 @@ public_http:
 # What this means is that the service.running state will look for changes to the firewalld.present state 
 # and restart firewalld if changes occur
 
-firewalld:
+firewalld_check_http:
   service.running:
     - watch:
       - firewalld: public

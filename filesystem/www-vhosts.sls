@@ -10,6 +10,11 @@
     - recurse:
       - user
       - group
+  module.run:
+    - name: file.set_selinux_context
+    - path: /srv/www
+    - type: httpd_sys_content_t
+    - unless: "stat -c %C /srv/www | grep 'httpd_sys_content_t'"
 
 /srv/www/vhosts/:
   file.directory:
@@ -25,3 +30,9 @@
     - acl_name: jenkins
     - perms: rwx
     - recurse: True
+  module.run:
+    - name: file.set_selinux_context
+    - path: /srv/www/vhosts
+    - type: httpd_sys_content_t
+    - unless: "stat -c %C /srv/www/vhosts | grep 'httpd_sys_content_t'"
+

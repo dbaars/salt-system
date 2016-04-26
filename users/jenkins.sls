@@ -1,18 +1,18 @@
 # The below adds the Jenkins user to the system
 # Note: The ssh key is stored on the file system /srv/salt rather than in github
 
-jenkins:
+Add Jenkins user and group:
   group.present:
     - name: jenkins
     - gid: 1001
   user.present:
-    - fullname: Jenkins CI
+    - name: jenkins
     - shell: /bin/bash
-    - gid: 1001
     - groups:
       - wheel
       - jenkins
     - empty_password: True
+
   ssh_auth.present:
     - user: jenkins
     - source: salt://ssh_keys/jenkins_id_rsa.pub

@@ -1,7 +1,7 @@
 # Adds /srv/www and /srv/www/vhosts folders
 # Assigns rights as specified
 
-/srv/www/:
+/var/www/html:
   file.directory:
     - user: apache
     - group: apache
@@ -10,13 +10,13 @@
     - recurse:
       - user
       - group
-  module.run:
-    - name: file.set_selinux_context
-    - path: /srv/www
-    - type: httpd_sys_content_t
-    - unless: "stat -c %C /srv/www | grep 'httpd_sys_content_t'"
+#  module.run:
+#    - name: file.set_selinux_context
+#    - path: /srv/www
+#    - type: httpd_sys_content_t
+#    - unless: "stat -c %C /srv/www | grep 'httpd_sys_content_t'"
 
-/srv/www/vhosts/:
+/var/www/html/vhosts:
   file.directory:
     - user: apache
     - group: apache
@@ -30,9 +30,9 @@
     - acl_name: jenkins
     - perms: rwx
     - recurse: True
-  module.run:
-    - name: file.set_selinux_context
-    - path: /srv/www/vhosts
-    - type: httpd_sys_content_t
-    - unless: "stat -c %C /srv/www/vhosts | grep 'httpd_sys_content_t'"
+#  module.run:
+#    - name: file.set_selinux_context
+#    - path: /srv/www/vhosts
+#    - type: httpd_sys_content_t
+#    - unless: "stat -c %C /srv/www/vhosts | grep 'httpd_sys_content_t'"
 

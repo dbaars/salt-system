@@ -1,0 +1,15 @@
+# File managed by Salt
+
+driftfile /var/lib/ntp/drift
+logfile /var/log/ntp
+keys /etc/ntp/keys
+trustedkey 1
+requestkey 1
+
+server {{ pillar['ntp1'] }} iburst
+server {{ pillar['ntp2'] }} iburst
+server {{ pillar['ntp3'] }} iburst
+
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+restrict 127.0.0.1

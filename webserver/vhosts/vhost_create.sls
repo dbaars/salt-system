@@ -21,6 +21,8 @@
   file.managed:
     - source: salt://webserver/vhosts/vhost.template
     - template: jinja
+    - defaults:
+      vhost_val: {{ vhost_val }}
     - mode: 644
     - user: root
     - group: root

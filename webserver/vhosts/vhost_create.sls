@@ -11,6 +11,8 @@
     - recurse:
       - user
       - group
+    - require:
+      - pkg: httpd
   acl.present:
     - acl_type: user
     - acl_name: jenkins

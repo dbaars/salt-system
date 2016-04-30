@@ -10,6 +10,8 @@
     - recurse:
       - user
       - group
+    - require:
+      - pkg: httpd
 #  module.run:
 #    - name: file.set_selinux_context
 #    - path: /srv/www
@@ -30,6 +32,8 @@
     - acl_name: jenkins
     - perms: rwx
     - recurse: True
+    - require:
+      - pkg: httpd
 #  module.run:
 #    - name: file.set_selinux_context
 #    - path: /srv/www/vhosts

@@ -2,10 +2,10 @@
 # Require that the php.sls (webserver/php/init.sls) is installed first
 
 include:
-  - php
+  - webserver/php
 
 php-common:
   pkg.installed:
     - name: php-common
     - require:
-      - sls: php
+      - sls: webserver/php

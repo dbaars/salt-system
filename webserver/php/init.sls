@@ -2,6 +2,3 @@
 
 php:
   pkg.installed: []
-  service.running:
-    - require:
-      - pkg: php

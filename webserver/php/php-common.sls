@@ -8,4 +8,4 @@ php-common:
   pkg.installed:
     - name: php-common
     - require:
-      - sls: webserver.php
+      - sls: php

@@ -1,7 +1,8 @@
 # Open firewall for port 5432 in the public zone
 # For Postgresql normally
+# Add pillar "FirewalldPort5432To"
 
-{% for key, ip_app_server in pillar.items() if key.startswith('firewalld_open_to') %}
+{% for key, ip_app_server in pillar.items() if key.startswith('FirewalldPort5432To') %}
 public_fw_allow_{{ ip_app_server }}_to_port_5432:
   zones:
     public:
@@ -18,3 +19,4 @@ firewalld_check_public_{{ ip_app_server }}:
     - name: firewalld
     - watch:
       - firewalld: public
+{% endfor %}

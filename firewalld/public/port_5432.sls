@@ -9,9 +9,9 @@ public_fw_allow_{{ ip_app_server }}_to_port_5432:
       rich_rules:
         - family: ipv4
           source:
-              address: {{ ip_app_server }}/24
-              port: 5432
-              protocol: tcp
+            address: {{ ip_app_server }}/24
+            port: 5432
+            protocol: tcp
           accept: true
 
 firewalld_check_public_{{ ip_app_server }}:

@@ -5,7 +5,7 @@ postgres:
   pkg_client: postgresql-client
   pkgs_extra:
   python: python-psycopg2
-  service: postgresql
+  service: postgresql-9.4
   conf_dir: /var/lib/pgsql/data
   create_cluster: False
   init_db: False

@@ -31,7 +31,7 @@ postgresql-initdb:
     - cwd: /
     - user: root
     - name: {{ postgres.commands.initdb }}
-    - unless: test -f {{ postgres.conf_dir }}/postgresql.conf
+    - unless: test -f {{ postgres.conf_dir }}/pg_hba.conf
     - env:
       LC_ALL: C.UTF-8
 {% endif %}

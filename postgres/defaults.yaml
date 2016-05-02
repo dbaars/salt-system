@@ -8,8 +8,8 @@ postgres:
   service: postgresql-9.4
   conf_dir: /var/lib/pgsql/data
   create_cluster: False
-  init_db: False
-  version: 9.1
+  init_db: True
+  version: 9.4
   use_upstream_repo: False
   users: {}
   acls: []
@@ -19,4 +19,4 @@ postgres:
   postgresconf: ""
   pg_hba.conf: salt://postgres/pg_hba.conf
   commands:
-    initdb: service postgresql initdb
+    initdb: /usr/pgsql-9.4/bin/postgresql94-setup initdb

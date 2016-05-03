@@ -9,7 +9,7 @@
     CustomLog /var/log/httpd/{{ vhost_val }}-access.log combined
     DocumentRoot /var/www/html/vhosts/{{ vhost_val }}
 
-    <Directory "/srv/www/vhosts/{{ vhost_val }}">
+    <Directory "/var/www/html/vhosts/{{ vhost_val }}">
         Options -Indexes +FollowSymlinks
         Order allow,deny
         Allow from all

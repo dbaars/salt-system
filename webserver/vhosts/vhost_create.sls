@@ -1,6 +1,21 @@
 # key is "vhost_applicationmessages" or "vhost_styles2" etc
 # value is e.g. applicationmessages.niwa.co.nz
 
+include:
+  - apache
+
+/etc/httpd/vhosts.d/default.conf:
+  file.managed:
+    - source: salt://webserver/vhosts/default.conf.template
+    - template: jinja
+    - mode: 644
+    - user: root
+    - group: root
+    - require:
+      - pkg: apache
+    - watch_in:
+      - module: apache-reload
+
 {% for key, vhost_val in pillar.items() if key.startswith('vhost') %}
 /var/www/html/vhosts/{{ vhost_val }}:
   file.directory:
@@ -28,5 +43,9 @@
     - mode: 644
     - user: root
     - group: root
+    - require:
+      - pkg: apache
+    - watch_in:
+      - module: apache-reload
 
 {% endfor %}

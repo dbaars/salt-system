@@ -1,16 +1,18 @@
-Install Java for Jenkins:
-  pkg.installed:
-    - pkgs: 
-      - java-1.8.0-openjdk
+java-1.8.0-openjdk:
+  pkg.installed: []
 
-Install Jenkins:
-  pkg.installed:
-    - pkgs: 
-      - jenkins
+jenkins:
+  pkg.installed: []
+  file.replace:
+    - name: /etc/sysconfig/jenkins
+    - pattern: 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true"'
+    - repl: 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djava.io.tmpdir=$JENKINS_HOME/tmp"'
   service.running:
     - name: jenkins
     - require:
       - pkg: jenkins
   require:
-    - pkg: java
+    - pkg: java-1.8.0-openjdk
 
+
+  

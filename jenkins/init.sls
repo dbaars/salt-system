@@ -1,11 +1,12 @@
 Install Java for Jenkins:
   pkg.installed:
     - pkgs: 
-      - java
+      - java-1.8.0-openjdk
 
 Install Jenkins:
   pkg.installed:
-    - pkg: jenkins
+    - pkgs: 
+      - jenkins
   service.running:
     - name: jenkins
     - require:

@@ -1,3 +1,6 @@
+include:
+  - users.jenkins
+
 java-1.8.0-openjdk:
   pkg.installed: []
 
@@ -13,6 +16,7 @@ jenkins:
       - pkg: jenkins
   require:
     - pkg: java-1.8.0-openjdk
+    - sls: users.jenkins
 
 
   

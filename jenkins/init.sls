@@ -9,8 +9,7 @@ Install Jenkins:
   service.running:
     - name: jenkins
     - require:
-      - pkgs: 
-        - jenkins
+      - pkg: jenkins
   require:
     - pkg: java
 

@@ -3,7 +3,8 @@ Install Java for Jenkins:
     - pkgs: java
 
 Install Jenkins:
-  pkg.installed: []
+  pkg.installed:
+    - pkg: jenkins
   service.running:
     - name: jenkins
     - require:

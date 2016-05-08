@@ -6,10 +6,13 @@ java-1.8.0-openjdk:
 
 jenkins:
   pkg.installed: []
-  file.replace:
+  file.managed:
     - name: /etc/sysconfig/jenkins
-    - pattern: 'JENKINS_JAVA_OPTIONS="*"'
-    - repl: 'JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djava.io.tmpdir=$JENKINS_HOME/tmp -Djavax.net.ssl.trustStore=/etc/alternatives/jre_1.8.0_openjdk/lib/security/cacerts -Dhudson.plugins.active_directory.ActiveDirectorySecurityRealm.forceLdaps=true"'
+    - source: salt://jenkins/jenkins.sysconfig.template
+    - template: jinja
+    - mode: 600
+    - user: root
+    - group: root
   service.running:
     - name: jenkins
     - require:

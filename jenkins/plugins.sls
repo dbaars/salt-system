@@ -1,6 +1,16 @@
 include:
   - jenkins
 
+{% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
+{% set master_url = 'http://testvm3.niwa.local:8080' %}
+
+{%- macro fmtarg(prefix, value)-%}
+{{ (prefix + ' ' + value) if value else '' }}
+{%- endmacro -%}
+{%- macro jenkins_cli(cmd) -%}
+{{ ' '.join(['java', '-jar', cli_path, '-s', master_url, cmd]) }} {{ ' '.join(varargs) }}
+{%- endmacro -%}
+
 {% set jenkinsplugins = salt['pillar.get']('jenkinsplugins') %}
 {% for plugin in jenkinsplugins.split(',') %}
 

@@ -23,13 +23,6 @@ jenkins:
     - mode: 600
     - user: root
     - group: root
-  file.managed:
-    - name: /var/lib/jenkins/config.xml
-    - source: salt://jenkins/config.xml.template
-    - template: jinja
-    - mode: 640
-    - user: jenkins
-    - group: jenkins
   service.running:
     - name: jenkins
     - Enable: True
@@ -49,6 +42,13 @@ jenkins_install_AD_plugin:
       - cmd: jenkins_responding
     - watch_in:
       - cmd: restart_jenkins
+  file.managed:
+    - name: /var/lib/jenkins/config.xml
+    - source: salt://jenkins/config.xml.template
+    - template: jinja
+    - mode: 640
+    - user: jenkins
+    - group: jenkins
 
 restart_jenkins:
   cmd.wait:

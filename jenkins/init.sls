@@ -32,7 +32,7 @@ jenkins:
     - pkg: java-1.8.0-openjdk
     - sls: users.jenkins
 
-/var/lib/jenkins/config.xml
+/var/lib/jenkins/config.xml:
   file.managed:
     - source: salt://jenkins/config.xml.template
     - template: jinja

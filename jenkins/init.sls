@@ -12,6 +12,7 @@ include:
 {%- endmacro -%}
 
 
+
 java-1.8.0-openjdk:
   pkg.installed: []
 
@@ -57,7 +58,7 @@ jenkins_responding:
 jenkins_login:
   cmd.run:
     - unless: {{ jenkins_cli('who-am-i') }} | grep zsaltuser
-    - name: {{ jenkins_cli('login', '--username=zsaltuser', '--password=dnfiuDFDVe3n4gnds') }}
+    - name: {{ jenkins_cli('login', '--username=zsaltuser', '--password={{ pillar['zsaltuserpw'] }}') }}
     - timout: 120
     - require:
       - service: jenkins

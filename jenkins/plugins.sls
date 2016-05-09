@@ -26,24 +26,34 @@ jenkins_install_plugin_{{ plugin }}:
     - watch_in:
       - cmd: restart_jenkins
 
-{% if 'active-directory' in {{ plugin }} %}
+{% if plugin == 'active-directory' %}
+
+#test_id_{{ plugin }}:
+#  cmd.run:
+#    - name: "echo hello world"
+
 /var/lib/jenkins/ad_auth.groovy:
   file.managed:
-    - source: salt://jenkins/ad_auth_groovy.script
+    - source: salt://jenkins/ad_auth.groovy.script
     - template: jinja
     - mode: 755
     - user: jenkins
     - group: jenkins
 
+configure_ad_auth_via_{{ plugin }}:
   cmd.run:
-    - name: {{ jenkins_cli('groovy', {{ name }}) }}
+    - name: {{ jenkins_cli('groovy', '/var/lib/jenkins/ad_auth.groovy') }}
     - timeout: 120
     - require:
       - service: jenkins
-#      - cmd: jenkins_updates_file
       - cmd: jenkins_responding
     - watch_in:
       - cmd: restart_jenkins
+    - watch:
+      - file: /var/lib/jenkins/ad_auth.groovy
+    - unless:
+      - cat /var/lib/jenkins/config.xml | grep niwa
 
 {% endif %}
+
 {% endfor %}

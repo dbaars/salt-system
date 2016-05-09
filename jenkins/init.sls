@@ -10,6 +10,9 @@ include:
 {%- macro jenkins_cli(cmd) -%}
 {{ ' '.join(['java', '-jar', cli_path, '-s', master_url, cmd]) }} {{ ' '.join(varargs) }}
 {%- endmacro -%}
+{%- macro jenkins_cli_login(cmd) -%}
+{{ ' '.join(['java', '-jar', cli_path, '-s', master_url, 'login', '--username=zsaltuser', '--password=dnfiuDFDVe3n4gnds']) }} {{ ' '.join(varargs) }}
+{%- endmacro -%}
 
 java-1.8.0-openjdk:
   pkg.installed: []
@@ -56,7 +59,7 @@ jenkins_responding:
 jenkins_login:
   cmd.run:
     - unless: {{ jenkins_cli('who-am-i') }} | grep zsaltuser
-    - name: {{ jenkins_cli('login', '--username=zsaltuser', '--password=dnfiuDFDVe3n4gnds') }}
+    - name: {{ jenkins_cli_login() }}
     - timout: 120
     - require:
       - service: jenkins

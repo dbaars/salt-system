@@ -56,7 +56,7 @@ jenkins_responding:
 jenkins_login:
   cmd.run:
     - unless: {{ jenkins_cli('who-am-i') }} | grep zsaltuser
-    - name: {{ jenkins_cli('login', '--username=zsaltuser --password=dnfiuDFDVe3n4gnds') }}
+    - name: {{ jenkins_cli('login', '--username=zsaltuser', '--password=dnfiuDFDVe3n4gnds') }}
     - timout: 120
     - require:
       - service: jenkins

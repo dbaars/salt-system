@@ -40,18 +40,6 @@ jenkins:
     - user: jenkins
     - group: jenkins
 
-jenkins_install_AD_plugin:
-  cmd.run:
-    - unless: {{ jenkins_cli('list-plugins') }} | grep active-directory
-    - name: {{ jenkins_cli('install-plugin', 'active-directory') }}
-    - timeout: 120
-    - require:
-      - service: jenkins
-      - cmd: jenkins_responding
-    - watch_in:
-      - cmd: restart_jenkins
-
-
 restart_jenkins:
   cmd.wait:
     - name: {{ jenkins_cli('safe-restart') }}
@@ -62,3 +50,13 @@ jenkins_responding:
   cmd.wait:
     - name: "until {{ jenkins_cli('who-am-i') }}; do sleep 1; done"
     - timeout: 120
+    - require:
+      cmd: jenkins_login
+
+jenkins_login:
+  cmd.run:
+    - unless: {{ jenkins_cli('who-am-i') }} | grep zsaltuser
+    - name: {{ jenkins_cli('login', '--username=zsaltuser --password=dnfiuDFDVe3n4gnds') }}
+    - timout: 120
+    - require:
+      - service: jenkins

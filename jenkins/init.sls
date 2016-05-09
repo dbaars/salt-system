@@ -23,6 +23,13 @@ jenkins:
     - mode: 600
     - user: root
     - group: root
+  file.managed:
+    - name: /var/lib/jenkins/config.xml
+    - source: salt://jenkins/config.xml.template
+    - template: jinja
+    - mode: 640
+    - user: jenkins
+    - group: jenkins
   service.running:
     - name: jenkins
     - Enable: True
@@ -31,6 +38,17 @@ jenkins:
   require:
     - pkg: java-1.8.0-openjdk
     - sls: users.jenkins
+
+jenkins_install_AD_plugin:
+  cmd.run:
+    - unless: {{ jenkins_cli('list-plugins') }} | grep active-directory
+    - name: {{ jenkins_cli('install-plugin', 'active-directory') }}
+    - timeout: 120
+    - require:
+      - service: jenkins
+      - cmd: jenkins_responding
+    - watch_in:
+      - cmd: restart_jenkins
 
 restart_jenkins:
   cmd.wait:

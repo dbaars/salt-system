@@ -3,6 +3,7 @@ include:
 
 {% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = 'http://testvm3.niwa.local:8080' %}
+{% set zsaltuserpw = {{ salt['pillar.get']('zsaltuserpw') }}
 
 {%- macro fmtarg(prefix, value)-%}
 {{ (prefix + ' ' + value) if value else '' }}
@@ -58,7 +59,7 @@ jenkins_responding:
 jenkins_login:
   cmd.run:
     - unless: {{ jenkins_cli('who-am-i') }} | grep zsaltuser
-    - name: {{ jenkins_cli('login', '--username=zsaltuser', '--password={{ pillar['zsaltuserpw'] }}') }}
+    - name: {{ jenkins_cli('login', '--username=zsaltuser', '--password=', zsaltuserpw) }}
     - timout: 120
     - require:
       - service: jenkins

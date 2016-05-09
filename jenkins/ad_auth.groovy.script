@@ -8,7 +8,6 @@ String site = 'WEL'
 String server = ''
 String bindName = ''
 String bindPassword = ''
-String forceLdaps=true
-adrealm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server,forceLdaps)
+adrealm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server)
 instance.setSecurityRealm(adrealm)
 instance.save()

@@ -26,4 +26,24 @@ jenkins_install_plugin_{{ plugin }}:
     - watch_in:
       - cmd: restart_jenkins
 
+{% if 'active-directory' in {{ plugin }} %}
+/var/lib/jenkins/ad_auth.groovy:
+  file.managed:
+    - source: salt://jenkins/ad_auth_groovy.script
+    - template: jinja
+    - mode: 755
+    - user: jenkins
+    - group: jenkins
+
+  cmd.run:
+    - name: {{ jenkins_cli('groovy', {{ name }}) }}
+    - timeout: 120
+    - require:
+      - service: jenkins
+#      - cmd: jenkins_updates_file
+      - cmd: jenkins_responding
+    - watch_in:
+      - cmd: restart_jenkins
+
+{% endif %}
 {% endfor %}

@@ -1,0 +1,14 @@
+import jenkins.model.*
+import hudson.security.*
+import hudson.plugins.active_directory.*
+   
+def instance = Jenkins.getInstance()
+String domain = 'niwa.local'
+String site = 'WEL'
+String server = ''
+String bindName = ''
+String bindPassword = ''
+String forceLdaps=true
+adrealm = new ActiveDirectorySecurityRealm(domain, site, bindName, bindPassword, server,forceLdaps)
+instance.setSecurityRealm(adrealm)
+instance.save()

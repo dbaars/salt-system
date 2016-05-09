@@ -3,7 +3,7 @@ include:
 
 {% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = 'http://testvm3.niwa.local:8080' %}
-{% set zsaltuserpw = {{ salt['pillar.get']('zsaltuserpw') }}
+{% set zsaltuserpw = {{ salt['pillar.get']('zsaltuserpw') }} %}
 
 {%- macro fmtarg(prefix, value)-%}
 {{ (prefix + ' ' + value) if value else '' }}

@@ -44,7 +44,7 @@ JENKINS_USER="jenkins"
 #
 # Options to pass to java when running Jenkins.
 #
-JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djava.io.tmpdir=$JENKINS_HOME/tmp -Djavax.net.ssl.trustStore=/etc/pki/java/cacerts -Dhudson.plugins.active_directory.ActiveDirectorySecurityRealm.forceLdaps=true"
+JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Djava.io.tmpdir=$JENKINS_HOME/tmp -Djavax.net.ssl.trustStore=/etc/pki/java/cacerts"
 
 ## Type:        integer(0:65535)
 ## Default:     8080

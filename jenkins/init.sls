@@ -42,5 +42,3 @@ jenkins_responding:
   cmd.wait:
     - name: "until {{ jenkins_cli('who-am-i') }}; do sleep 1; done"
     - timeout: 120
-    - watch:
-      - cmd: jenkins_cli_jar

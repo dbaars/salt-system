@@ -50,6 +50,8 @@ jenkins:
     - group: jenkins
     - require:
       - pkg: jenkins
+    - watch_in:
+      - cmd: restart_jenkins
 
 /var/lib/jenkins/tmp:
   file.directory:

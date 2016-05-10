@@ -21,9 +21,9 @@
     SSLEngine On
     SSLProxyEngine On
 
-    SSLCertificateFile        /etc/httpd/conf/ssl.crt/wildcard.niwa.co.nz.crt
-    SSLCertificateKeyFile     /etc/httpd/conf/ssl.crt/wildcard.niwa.co.nz.key
-    SSLCACertificateFile      /etc/httpd/conf/ssl.crt/SSL_CA_Bundle.pem
+    SSLCertificateFile        /etc/pki/tls/certs/{{ revproxy_val }}.pem
+    SSLCertificateKeyFile     /etc/pki/tls/private/{{ revproxy_val }}.key
+    SSLCACertificateFile      /etc/pki/ca-trust/source/anchors/niwa_cacert.pem
 
     ProxyPass           /       http://localhost:8080/
     ProxyPassReverse    /       http://localhost:8080/

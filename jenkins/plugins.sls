@@ -1,7 +1,8 @@
 include:
   - jenkins
 
-{% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
+{% from "jenkins" import cli_path %}
+#{% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = 'http://testvm3.niwa.local:8080' %}
 {% set sshkey = '/root/.ssh/id_rsa' %}
 

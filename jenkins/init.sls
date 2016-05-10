@@ -60,6 +60,7 @@ jenkins:
       - pkg: jenkins
 
 /var/lib/jenkins/users/root:
+  file.directory:
     - user: jenkins
     - group: jenkins
     - dir_mode: 750

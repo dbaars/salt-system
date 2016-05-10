@@ -1,0 +1,39 @@
+<VirtualHost *:80>
+    ServerName          {{ revproxy_val }}
+
+    RedirectPermanent   /     https://{{ revproxy_val }}
+
+    TransferLog         /var/log/apache/{{ revproxy_val }}_access.log
+    ErrorLog            /var/log/apache/{{ revproxy_val }}_error.log
+
+    <Directory />
+      Options None
+      AllowOverride None
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName          {{ revproxy_val }}
+
+    ProxyRequests       off
+    ProxyPreserveHost   on
+
+    SSLEngine On
+    SSLProxyEngine On
+
+    SSLCertificateFile        /etc/httpd/conf/ssl.crt/wildcard.niwa.co.nz.crt
+    SSLCertificateKeyFile     /etc/httpd/conf/ssl.crt/wildcard.niwa.co.nz.key
+    SSLCACertificateFile      /etc/httpd/conf/ssl.crt/SSL_CA_Bundle.pem
+
+    ProxyPass           /       http://localhost:8080/
+    ProxyPassReverse    /       http://localhost:8080/
+	
+	<Proxy http://localhost:8080/*>
+		Order allow,deny
+		Allow from all
+	</Proxy>
+
+    TransferLog         /var/log/apache/{{ revproxy_val }}_access.log
+    ErrorLog            /var/log/apache/{{ revproxy_val }}_error.log
+</VirtualHost>
+

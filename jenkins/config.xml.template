@@ -8,6 +8,7 @@
   <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
     <permission>hudson.model.Hudson.Administer:it-ops</permission>
     <permission>hudson.model.Hudson.Administer:jenkins-admins</permission>
+	<permission>hudson.model.Hudson.Administer:root</permission>
   </authorizationStrategy>
   <securityRealm class="hudson.security.PAMSecurityRealm" plugin="pam-auth@1.2">
     <serviceName>sshd</serviceName>

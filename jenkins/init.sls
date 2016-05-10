@@ -48,6 +48,16 @@ jenkins:
     - mode: 640
     - user: jenkins
     - group: jenkins
+    - require:
+      - pkg: jenkins
+
+/var/lib/jenkins/tmp:
+  file.directory:
+    - user: jenkins
+    - group: jenkins
+    - dir_mode: 700
+    - require:
+      - pkg: jenkins
 
 restart_jenkins:
   cmd.wait:

@@ -1,10 +1,10 @@
 <VirtualHost *:80>
-    ServerName          {{ revproxy_val }}
+    ServerName          {{ vhost_val }}
 
-    RedirectPermanent   /     https://{{ revproxy_val }}
+    RedirectPermanent   /     https://{{ vhost_val }}
 
-    TransferLog         /var/log/apache/{{ revproxy_val }}_access.log
-    ErrorLog            /var/log/apache/{{ revproxy_val }}_error.log
+    TransferLog         /var/log/apache/{{ vhost_val }}_access.log
+    ErrorLog            /var/log/apache/{{ vhost_val }}_error.log
 
     <Directory />
       Options None
@@ -13,7 +13,7 @@
 </VirtualHost>
 
 <VirtualHost *:443>
-    ServerName          {{ revproxy_val }}
+    ServerName          {{ vhost_val }}
 
     ProxyRequests       off
     ProxyPreserveHost   on
@@ -21,8 +21,8 @@
     SSLEngine On
     SSLProxyEngine On
 
-    SSLCertificateFile        /etc/pki/tls/certs/{{ revproxy_val }}.pem
-    SSLCertificateKeyFile     /etc/pki/tls/private/{{ revproxy_val }}.key
+    SSLCertificateFile        /etc/pki/tls/certs/{{ vhost_val }}.pem
+    SSLCertificateKeyFile     /etc/pki/tls/private/{{ vhost_val }}.key
     SSLCACertificateFile      /etc/pki/ca-trust/source/anchors/niwa_cacert.pem
 
     ProxyPass           /       http://localhost:8080/
@@ -33,7 +33,7 @@
 		Allow from all
 	</Proxy>
 
-    TransferLog         /var/log/apache/{{ revproxy_val }}_access.log
-    ErrorLog            /var/log/apache/{{ revproxy_val }}_error.log
+    TransferLog         /var/log/apache/{{ vhost_val }}_access.log
+    ErrorLog            /var/log/apache/{{ vhost_val }}_error.log
 </VirtualHost>
 

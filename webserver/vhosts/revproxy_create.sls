@@ -11,7 +11,7 @@ include:
     - source: salt://webserver/vhosts/localrevproxy.template
     - template: jinja
     - defaults:
-      vhost_val: {{ vhost_val }}
+      vhost_val: {{ revproxy_val }}
     - mode: 644
     - user: root
     - group: root

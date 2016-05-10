@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>root</fullName>
+  <description></description>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>95EbFQpY800KyaGnyEmCuGcJmSjN1uN6hgvc0CP6konmzHHlbAOQrzqF1ZzHluBU</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.28">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.17">
+      <emailAddress></emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>root</string>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1462827495785</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3k2gD9xB9wskjve0SIG+qyEkmySfPvMZj3GBrWhk2zUE418+hVMstIGVhWLlOGKXhG466s6jiN4gSyMKOWiAXc18tFiNbIUpRMPVV6spQrA0vIwj0L/OXbPDuNCT9FQn8ggAjYLoX3Y9vAWwmk5hkWOubS4YqxOqwYNtEC75wxBimLDH86FQeWt+uPh77VVsq6Nh2YROqXqjwt8GBjK5bDpfEwIaifsk+7iOI+8ITBTr0fsaO2HK/+CBT6zIUFbcuEphKn6yS0jT+1PI59Chxio3Xz/J73SBtuIZQzYoNtGrQ/EwFqYcfJJjpGgIVK0dgVZ1vMgki2Lgm8tnCTtah root@anywhere</authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+  </properties>
+</user>

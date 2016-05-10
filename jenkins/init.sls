@@ -27,7 +27,7 @@ jenkins:
   pkg.installed: []
   file.managed:
     - name: /etc/sysconfig/jenkins
-    - source: salt://jenkins/jenkins.sysconfig.template
+    - source: salt://jenkins/files/jenkins.sysconfig.template
     - template: jinja
     - mode: 600
     - user: root
@@ -43,7 +43,7 @@ jenkins:
 
 /var/lib/jenkins/config.xml:
   file.managed:
-    - source: salt://jenkins/config.xml.template
+    - source: salt://jenkins/files/config.xml.template
     - template: jinja
     - mode: 640
     - user: jenkins
@@ -56,6 +56,23 @@ jenkins:
     - user: jenkins
     - group: jenkins
     - dir_mode: 700
+    - require:
+      - pkg: jenkins
+
+/var/lib/jenkins/users/root:
+    - user: jenkins
+    - group: jenkins
+    - dir_mode: 750
+    - require:
+      - pkg: jenkins
+
+/var/lib/jenkins/users/root/config.xml:
+  file.managed:
+    - source: salt://jenkins/files/root_config.xml.template
+    - template: jinja
+    - mode: 640
+    - user: jenkins
+    - group: jenkins
     - require:
       - pkg: jenkins
 

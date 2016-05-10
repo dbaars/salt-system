@@ -3,8 +3,8 @@
 
     RedirectPermanent   /     https://{{ vhost_val }}
 
-    TransferLog         /var/log/apache/{{ vhost_val }}_access.log
-    ErrorLog            /var/log/apache/{{ vhost_val }}_error.log
+    TransferLog         /var/log/httpd/{{ vhost_val }}_access.log
+    ErrorLog            /var/log/httpd/{{ vhost_val }}_error.log
 
     <Directory />
       Options None
@@ -33,7 +33,7 @@
 		Allow from all
 	</Proxy>
 
-    TransferLog         /var/log/apache/{{ vhost_val }}_access.log
-    ErrorLog            /var/log/apache/{{ vhost_val }}_error.log
+    TransferLog         /var/log/httpd/{{ vhost_val }}_access.log
+    ErrorLog            /var/log/httpd/{{ vhost_val }}_error.log
 </VirtualHost>
 

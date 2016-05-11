@@ -6,8 +6,28 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Create:jenkins-users</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:jenkins-users</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:jenkins-users</permission>
+    <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:jenkins-users</permission>
     <permission>hudson.model.Hudson.Administer:jenkins-admins</permission>
-	<permission>hudson.model.Hudson.Administer:root</permission>
+    <permission>hudson.model.Hudson.Administer:root</permission>
+    <permission>hudson.model.Hudson.Read:jenkins-users</permission>
+    <permission>hudson.model.Item.Build:jenkins-users</permission>
+    <permission>hudson.model.Item.Cancel:jenkins-users</permission>
+    <permission>hudson.model.Item.Configure:jenkins-users</permission>
+    <permission>hudson.model.Item.Create:jenkins-users</permission>
+    <permission>hudson.model.Item.Delete:jenkins-users</permission>
+    <permission>hudson.model.Item.Discover:jenkins-users</permission>
+    <permission>hudson.model.Item.Read:jenkins-users</permission>
+    <permission>hudson.model.Item.Workspace:jenkins-users</permission>
+    <permission>hudson.model.Run.Update:jenkins-users</permission>
+    <permission>hudson.model.View.Configure:jenkins-users</permission>
+    <permission>hudson.model.View.Create:jenkins-users</permission>
+    <permission>hudson.model.View.Delete:jenkins-users</permission>
+    <permission>hudson.model.View.Read:jenkins-users</permission>
+    <permission>hudson.scm.SCM.Tag:jenkins-users</permission>
+
   </authorizationStrategy>
   <securityRealm class="hudson.security.PAMSecurityRealm" plugin="pam-auth@1.2">
     <serviceName>sshd</serviceName>

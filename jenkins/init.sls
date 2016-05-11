@@ -21,6 +21,27 @@ include:
     - group: root
     - contents_pillar: jenkinskey
 
+{% for key, value in pillar.items() if key == 'localrevproxy_jenkins' %}
+/etc/pki/tls/certs/{{ key }}.pem:
+  file.managed:
+    - mode: 444
+    - user: root
+    - group: root
+    - contents_pillar: jenkins_cert
+  selinux.boolean:
+    - name: httpd_can_network_connect
+    - value: true
+    - persist: true
+
+/etc/pki/tls/private/{{ key }}.key:
+  file.managed:
+    - mode: 644
+    - user: root
+    - group: root
+    - contents_pillar: jenkins_privatekey
+
+{% endfor %}
+	
 java-1.8.0-openjdk:
   pkg.installed: []
 
@@ -79,13 +100,6 @@ jenkins:
     - group: jenkins
     - require:
       - pkg: jenkins
-
-httpd_can_network_connect:
-  selinux.boolean:
-    - value: true
-    - persist: true
-    - require:
-      - pkg: apache
 
 restart_jenkins:
   cmd.wait:

@@ -6,7 +6,6 @@
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.GlobalMatrixAuthorizationStrategy">
-    <permission>hudson.model.Hudson.Administer:it-ops</permission>
     <permission>hudson.model.Hudson.Administer:jenkins-admins</permission>
 	<permission>hudson.model.Hudson.Administer:root</permission>
   </authorizationStrategy>

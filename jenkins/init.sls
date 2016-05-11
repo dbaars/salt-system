@@ -1,5 +1,6 @@
 include:
   - users.jenkins
+  - apache
 
 {% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = salt['pillar.get']('jenkinsurl') %}
@@ -78,6 +79,13 @@ jenkins:
     - group: jenkins
     - require:
       - pkg: jenkins
+
+httpd_can_network_connect:
+  selinux.boolean:
+    - value: true
+    - persist: true
+    - require:
+      - pkg: apache
 
 restart_jenkins:
   cmd.wait:

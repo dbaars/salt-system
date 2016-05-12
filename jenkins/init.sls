@@ -1,7 +1,7 @@
 include:
   - users.jenkins
   - apache
-  - revproxy_create
+  - webserver.vhosts.revproxy_create
 
 {% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = salt['pillar.get']('jenkinsurl') %}
@@ -51,7 +51,7 @@ MakeRootSSHdirforJenkins:
       - pkg: apache
       - pkg: mod_ssl
     - require_in:
-      - sls: revproxy_create
+      - sls: webserver.vhosts.revproxy_create
     - watch_in:
       - module: apache-restart
 
@@ -65,7 +65,7 @@ MakeRootSSHdirforJenkins:
       - pkg: apache
       - pkg: mod_ssl
     - require_in:
-      - sls: revproxy_create
+      - sls: webserver.vhosts.revproxy_create
     - watch_in:
       - module: apache-restart
 

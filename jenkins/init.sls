@@ -19,12 +19,21 @@ include:
 # 3. Configure SSSD with the Jenkins groups
 # 4. Install Java
 
+MakeRootSSHdirforJenkins:
+  file.directory:
+    - name: /root/.ssh
+    - user: root
+    - group: root
+    - dir_mode: 700
+
 /root/.ssh/id_rsa:
   file.managed:
     - mode: 600
     - user: root
     - group: root
     - contents_pillar: jenkinskey
+    - require:
+      - file: /root/.ssh
 
 {% for key, value in pillar.items() if key == 'localrevproxy_jenkins' %}
 /etc/pki/tls/certs/{{ key }}.pem:

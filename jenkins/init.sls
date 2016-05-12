@@ -102,6 +102,13 @@ jenkins:
     - mode: 600
     - user: root
     - group: root
+  file.directory:
+    - name: /var/lib/jenkins/tmp
+    - user: jenkins
+    - group: jenkins
+    - dir_mode: 700
+    - require:
+      - pkg: jenkins
   service.running:
     - name: jenkins
     - Enable: True
@@ -127,13 +134,13 @@ jenkins:
 # Jenkins requires execute privileges to a tmp directory. As our Kickstart disables exe to /tmp
 # we need to create a directory where Jenkins can execute in
 # This directory is then pointed to by the startup script /etc/sysconfig/jenkins
-/var/lib/jenkins/tmp:
-  file.directory:
-    - user: jenkins
-    - group: jenkins
-    - dir_mode: 700
-    - require:
-      - pkg: jenkins
+#/var/lib/jenkins/tmp:
+#  file.directory:
+#    - user: jenkins
+#    - group: jenkins
+#    - dir_mode: 700
+#    - require:
+#      - pkg: jenkins
 
 # Create the users directory if 
 /var/lib/jenkins/users/root:

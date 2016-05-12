@@ -111,12 +111,13 @@ jenkins:
     - require:
       - pkg: jenkins
 
-# Create and manage the "root" user in Jenkins
+# Create the users directory if 
 /var/lib/jenkins/users/root:
   file.directory:
     - user: jenkins
     - group: jenkins
     - dir_mode: 750
+    - makedirs: True
     - require:
       - pkg: jenkins
 
@@ -131,6 +132,7 @@ jenkins:
     - group: jenkins
     - require:
       - pkg: jenkins
+      - file: /var/lib/jenkins/users/root
 
 # Use jenkins-cli to gracefully restart jenkins if required
 # Check and waits for jenkins to respond first

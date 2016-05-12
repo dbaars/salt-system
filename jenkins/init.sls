@@ -1,6 +1,7 @@
 include:
   - users.jenkins
   - apache
+  - revproxy_create
 
 {% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = salt['pillar.get']('jenkinsurl') %}

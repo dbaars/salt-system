@@ -36,7 +36,7 @@ MakeRootSSHdirforJenkins:
       - file: /root/.ssh
 
 {% for key, value in pillar.items() if key == 'localrevproxy_jenkins' %}
-/etc/pki/tls/certs/{{ key }}.pem:
+/etc/pki/tls/certs/{{ value }}.pem:
   file.managed:
     - mode: 444
     - user: root
@@ -46,13 +46,22 @@ MakeRootSSHdirforJenkins:
     - name: httpd_can_network_connect
     - value: true
     - persist: true
+    - require:
+      - pkg: apache
+    - watch_in:
+      - module: apache-restart
 
-/etc/pki/tls/private/{{ key }}.key:
+/etc/pki/tls/private/{{ value }}.key:
   file.managed:
     - mode: 644
     - user: root
     - group: root
     - contents_pillar: jenkins_privatekey
+    - require:
+      - pkg: apache
+      - pkg: mod_ssl
+    - watch_in:
+      - module: apache-restart
 
 {% endfor %}
 

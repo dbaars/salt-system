@@ -48,6 +48,9 @@ MakeRootSSHdirforJenkins:
     - persist: true
     - require:
       - pkg: apache
+      - pkg: mod_ssl
+    - require_in:
+      - sls: revproxy_create
     - watch_in:
       - module: apache-restart
 
@@ -60,6 +63,8 @@ MakeRootSSHdirforJenkins:
     - require:
       - pkg: apache
       - pkg: mod_ssl
+    - require_in:
+      - sls: revproxy_create
     - watch_in:
       - module: apache-restart
 

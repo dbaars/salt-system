@@ -5,7 +5,7 @@
 include:
   - apache
 
-{% for key, value in pillar.items() if key.startswith('localrevproxy') %}
+{% for key, value in pillar.items() if key.startswith('localrevproxy_') %}
 
 /etc/httpd/vhosts.d/{{ value }}.conf:
   file.managed:
@@ -26,7 +26,7 @@ include:
     - mode: 444
     - user: root
     - group: root
-    - contents_pillar: localrevproxy_jenkins_cert
+    - contents_pillar: localrevproxycert__jenkins
   selinux.boolean:
     - name: httpd_can_network_connect
     - value: true
@@ -44,7 +44,7 @@ include:
     - mode: 644
     - user: root
     - group: root
-    - contents_pillar: localrevproxy_jenkins_privatekey
+    - contents_pillar: localrevproxyprivatekey_jenkins
     - require:
       - pkg: apache
       - pkg: mod_ssl

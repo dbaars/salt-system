@@ -17,8 +17,8 @@ include:
 
 jenkins_install_plugin_{{ plugin }}:
   cmd.run:
-    - unless: {{ jenkins_cli('list-plugins') }} | grep {{ plugin }}; sleep 3
-    - name: {{ jenkins_cli('install-plugin', plugin) }}; sleep 3
+    - unless: {{ jenkins_cli('list-plugins') }} | grep {{ plugin }}; sleep 2
+    - name: {{ jenkins_cli('install-plugin', plugin) }}; sleep 2
     - timeout: 120
     - require:
       - service: jenkins

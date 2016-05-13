@@ -36,41 +36,6 @@ MakeRootSSHdirforJenkins:
     - require:
       - file: /root/.ssh
 
-{% for key, value in pillar.items() if key == 'localrevproxy_jenkins' %}
-/etc/pki/tls/certs/{{ value }}.pem:
-  file.managed:
-    - mode: 444
-    - user: root
-    - group: root
-    - contents_pillar: jenkins_cert
-  selinux.boolean:
-    - name: httpd_can_network_connect
-    - value: true
-    - persist: true
-    - require:
-      - pkg: apache
-      - pkg: mod_ssl
-    - require_in:
-      - sls: webserver.vhosts.revproxy_create
-    - watch_in:
-      - module: apache-restart
-
-/etc/pki/tls/private/{{ value }}.key:
-  file.managed:
-    - mode: 644
-    - user: root
-    - group: root
-    - contents_pillar: jenkins_privatekey
-    - require:
-      - pkg: apache
-      - pkg: mod_ssl
-    - require_in:
-      - sls: webserver.vhosts.revproxy_create
-    - watch_in:
-      - module: apache-restart
-
-{% endfor %}
-
 # Note: This SSSD service check should be moved to a real SSSD state file when it exists
 sssd_service_check:
   service.running:
@@ -90,9 +55,12 @@ Add_jenkins_groups_to_sssd:
 java-1.8.0-openjdk:
   pkg.installed: []
 
- # Install Jenkins
- # Enable and start Jenkins
- # Requires Java and the users.jenkins sls
+# Install Jenkins
+# Enable and start Jenkins
+# Requires Java and the users.jenkins sls
+# Jenkins requires execute privileges to a tmp directory. As our Kickstart disables exe to /tmp
+# we need to create a directory where Jenkins can execute in
+# This directory is then pointed to by the startup script /etc/sysconfig/jenkins
 jenkins:
   pkg.installed: []
   file.managed:
@@ -131,18 +99,7 @@ jenkins:
     - watch_in:
       - cmd: restart_jenkins
 
-# Jenkins requires execute privileges to a tmp directory. As our Kickstart disables exe to /tmp
-# we need to create a directory where Jenkins can execute in
-# This directory is then pointed to by the startup script /etc/sysconfig/jenkins
-#/var/lib/jenkins/tmp:
-#  file.directory:
-#    - user: jenkins
-#    - group: jenkins
-#    - dir_mode: 700
-#    - require:
-#      - pkg: jenkins
-
-# Create the users directory if 
+# Create the users directory and root user folder if it doesn't exist 
 /var/lib/jenkins/users/root:
   file.directory:
     - user: jenkins

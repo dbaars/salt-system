@@ -70,8 +70,6 @@ jenkins:
     - mode: 600
     - user: root
     - group: root
-    - require:
-      - pkg: jenkins
   file.directory:
     - name: /var/lib/jenkins/tmp
     - user: jenkins
@@ -85,7 +83,6 @@ jenkins:
     - require:
       - pkg: jenkins
   require:
-    - sls: webserver.vhosts.revproxy_create
     - pkg: java-1.8.0-openjdk
     - sls: users.jenkins
 

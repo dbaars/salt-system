@@ -89,7 +89,7 @@ jenkins:
     - group: root
     - watch_in:
       - cmd: restart_jenkins
-	
+
 # Manage the main configuration file for Jenkins
 /var/lib/jenkins/config.xml:
   file.managed:

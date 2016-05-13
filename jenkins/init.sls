@@ -63,13 +63,6 @@ java-1.8.0-openjdk:
 # This directory is then pointed to by the startup script /etc/sysconfig/jenkins
 jenkins:
   pkg.installed: []
-  file.managed:
-    - name: /etc/sysconfig/jenkins
-    - source: salt://jenkins/files/jenkins.sysconfig.template
-    - template: jinja
-    - mode: 600
-    - user: root
-    - group: root
   file.directory:
     - name: /var/lib/jenkins/tmp
     - user: jenkins
@@ -86,6 +79,17 @@ jenkins:
     - pkg: java-1.8.0-openjdk
     - sls: users.jenkins
 
+/etc/sysconfig/jenkins:
+  file.managed:
+    - name: /etc/sysconfig/jenkins
+    - source: salt://jenkins/files/jenkins.sysconfig.template
+    - template: jinja
+    - mode: 600
+    - user: root
+    - group: root
+    - watch_in:
+      - cmd: restart_jenkins
+	
 # Manage the main configuration file for Jenkins
 /var/lib/jenkins/config.xml:
   file.managed:

@@ -1,9 +1,10 @@
-# key is "revproxy_cidev" or "revproxy_styles2" etc
+# key is "localrevproxy_cidev" or "localrevproxy_styles2" etc
 # value is FQDN of the website - e.g. cidev.niwa.local
-# MUST have a valid certifiate in pillar {{ key }}_cert and {{ key }}_privatekey
+# MUST have a valid certifiate in pillar value_cert and value_privatekey, where "value" is the FQDN of the website - e.g. cidev.niwa.local_cert and cidev.niwa.local_privatekey
 
 include:
   - apache
+  - apache.mod_ssl
 
 {% for key, value in pillar.items() if key.startswith('localrevproxy_') %}
 
@@ -18,6 +19,7 @@ include:
     - group: root
     - require:
       - pkg: apache
+      - pkg: mod_ssl
     - watch_in:
       - module: apache-reload
 
@@ -26,31 +28,21 @@ include:
     - mode: 444
     - user: root
     - group: root
-    - contents_pillar: localrevproxycert__jenkins
+    - contents_pillar: {{ value }}_cert
+    - require_in:
+      - file: /etc/httpd/vhosts.d/{{ value }}.conf
   selinux.boolean:
     - name: httpd_can_network_connect
     - value: true
     - persist: true
-    - require:
-      - pkg: apache
-      - pkg: mod_ssl
-    - require_in:
-      - sls: webserver.vhosts.revproxy_create
-    - watch_in:
-      - module: apache-restart
 
 /etc/pki/tls/private/{{ value }}.key:
   file.managed:
     - mode: 644
     - user: root
     - group: root
-    - contents_pillar: localrevproxyprivatekey_jenkins
-    - require:
-      - pkg: apache
-      - pkg: mod_ssl
+    - contents_pillar: {{ value }}_privatekey
     - require_in:
-      - sls: webserver.vhosts.revproxy_create
-    - watch_in:
-      - module: apache-restart
+      - file: /etc/httpd/vhosts.d/{{ value }}.conf
 
 {% endfor %}

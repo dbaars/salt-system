@@ -76,6 +76,7 @@ jenkins:
     - require:
       - pkg: jenkins
       - file: /etc/sysconfig/jenkins
+      - file: /var/lib/jenkins/config.xml
   require:
     - pkg: java-1.8.0-openjdk
     - sls: users.jenkins
@@ -139,4 +140,4 @@ restart_jenkins:
 jenkins_responding:
   cmd.wait:
     - name: "until {{ jenkins_cli('who-am-i') }}; do sleep 1; done"
-    - timeout: 120
+    - timeout: 60

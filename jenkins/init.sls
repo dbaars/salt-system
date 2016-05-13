@@ -75,6 +75,7 @@ jenkins:
     - Enable: True
     - require:
       - pkg: jenkins
+      - file: /etc/sysconfig/jenkins
   require:
     - pkg: java-1.8.0-openjdk
     - sls: users.jenkins

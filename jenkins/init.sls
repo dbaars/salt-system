@@ -2,6 +2,7 @@ include:
   - users.jenkins
   - apache
   - webserver.vhosts.revproxy_create
+  - java
 
 {% set cli_path = '/var/cache/jenkins/war/WEB-INF/jenkins-cli.jar' %}
 {% set master_url = salt['pillar.get']('jenkinsurl') %}
@@ -50,10 +51,6 @@ Add_jenkins_groups_to_sssd:
     - repl: '\1,jenkins-users,jenkins-admins'
     - watch_in:
       - service: sssd
-
-# Install Java
-java-1.8.0-openjdk:
-  pkg.installed: []
 
 # Install Jenkins
 # Enable and start Jenkins

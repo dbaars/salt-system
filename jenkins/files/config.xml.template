@@ -10,7 +10,7 @@
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Delete:jenkins-users</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.Update:jenkins-users</permission>
     <permission>com.cloudbees.plugins.credentials.CredentialsProvider.View:jenkins-users</permission>
-	<permission>hudson.model.Computer.Build:zjenkins</permission>
+    <permission>hudson.model.Computer.Build:zjenkins</permission>
     <permission>hudson.model.Computer.Configure:zjenkins</permission>
     <permission>hudson.model.Computer.Connect:zjenkins</permission>
     <permission>hudson.model.Computer.Create:zjenkins</permission>

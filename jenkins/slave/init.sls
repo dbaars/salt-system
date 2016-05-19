@@ -1,5 +1,5 @@
 include:
-  - java
+  - java.jdk
   - subversion
   - git
   - maven
@@ -13,15 +13,22 @@ Create swarm directory:
   file.directory:
     - name: /opt/swarm
     - user: root
-    - group: root
+    - group: users
+    - dir_mode: 755
+
+Create swarm working directory:
+  file.directory:
+    - name: /opt/swarm
+    - user: zjenkins
+    - group: unix-users
     - dir_mode: 700
 
 /opt/swarm/swarm-client-latest.jar:
   file.managed:
     - source: salt://jenkins/slave/files/swarm-client-latest.jar
-    - mode: 600
+    - mode: 644
     - user: root
-    - group: root
+    - group: users
     - require:
       - file: /opt/swarm
 

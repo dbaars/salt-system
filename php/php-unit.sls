@@ -1,3 +1,3 @@
 # Install phpunit
-phpunit:
+php-phpunit-PHPUnit:
   pkg.installed: []

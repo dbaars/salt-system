@@ -6,7 +6,7 @@ include:
 
 npm_install_plugin_{{ plugin }}:
   cmd.run:
-    - unless:  npm list -g less | grep {{ plugin }}
+    - unless:  npm -g list {{ plugin }} | grep {{ plugin }}
     - name: npm -g install {{ plugin }}
     - timeout: 120
     - require:

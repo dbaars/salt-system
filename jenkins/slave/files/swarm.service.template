@@ -1,10 +1,13 @@
 [Unit]
 Description=Jenkins swarm client which joins a master.
-Wants=network-online.target
-After=network-online.target
+After=opt.mount sssd.service network.service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/java -jar /opt/swarm/swarm-client-latest.jar -description "A CI Slave" -executors 1 -fsroot /opt/swarm -labels "Linux swarm" -master {{ pillar['jenkins_master'] }} -name {{ grains['host'] }} -username {{ pillar['jenkins_user'] }} -password {{ pillar['jenkins_password'] }}
 ExecStop=
 Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

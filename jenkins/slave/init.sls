@@ -30,7 +30,7 @@ swarm.service:
     - name: /etc/systemd/system/swarm.service
     - source: salt://jenkins/slave/files/swarm.service.template
     - template: jinja
-    - mode: 600
+    - mode: 644
     - user: root
     - group: root
   module.wait:

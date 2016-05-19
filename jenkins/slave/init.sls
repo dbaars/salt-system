@@ -1,5 +1,12 @@
 include:
   - java
+  - subversion
+  - git
+  - maven
+  - ant
+  - phpunit
+  - nodejs
+  - npm
 
 Create swarm directory:
   file.directory:

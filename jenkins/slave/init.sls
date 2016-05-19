@@ -4,7 +4,7 @@ include:
   - git
   - maven
   - ant
-  - phpunit
+  - php.phpunit
   - nodejs
   - npm
 

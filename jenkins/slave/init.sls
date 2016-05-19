@@ -19,7 +19,6 @@ Create swarm directory:
 /opt/swarm/swarm-client-latest.jar:
   file.managed:
     - source: salt://jenkins/slave/files/swarm-client-latest.jar
-    - template: jinja
     - mode: 600
     - user: root
     - group: root

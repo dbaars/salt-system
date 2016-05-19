@@ -1,3 +1,6 @@
+include:
+  - npm
+
 {% set npmplugins = salt['pillar.get']('npmplugins') %}
 {% for plugin in npmplugins.split(',') %}
 

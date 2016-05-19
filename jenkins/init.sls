@@ -106,7 +106,7 @@ jenkins:
 /var/lib/jenkins/users/root:
   file.directory:
     - user: jenkins
-    - group: jenkins
+    - group: unix-users
     - dir_mode: 750
     - makedirs: True
     - require:
@@ -124,6 +124,29 @@ jenkins:
     - require:
       - pkg: jenkins
       - file: /var/lib/jenkins/users/root
+
+# Create the zjenkins user directory - this user is used by slaves to connect to jenkins
+/var/lib/jenkins/users/zjenkins:
+  file.directory:
+    - user: jenkins
+    - group: unix-users
+    - dir_mode: 750
+    - makedirs: True
+    - require:
+      - pkg: jenkins
+
+# This file contains the zjenkins API key
+# This allows jenkins slave servers to connect
+/var/lib/jenkins/users/zjenkins/config.xml:
+  file.managed:
+    - source: salt://jenkins/files/zjenkins_config.xml.template
+    - template: jinja
+    - mode: 640
+    - user: jenkins
+    - group: unix-users
+    - require:
+      - pkg: jenkins
+      - file: /var/lib/jenkins/users/zjenkins
 
 # Use jenkins-cli to gracefully restart jenkins if required
 # Check and waits for jenkins to respond first

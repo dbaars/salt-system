@@ -12,4 +12,11 @@ npm_install_plugin_{{ plugin }}:
     - require:
       - pkg: npm
 
+npm_update_{{ plugin }}:
+  cmd.run:
+    - name: npm -g update {{ plugin }}
+    - timeout: 120
+    - require:
+      - pkg: npm
+
 {% endfor %}

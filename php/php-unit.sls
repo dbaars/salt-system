@@ -6,6 +6,7 @@ include:
 
 # Install phpunit
 php-phpunit-PHPUnit:
-  pkg.installed: []
+  pkg.installed:
+    - name: php-phpunit-PHPUnit
     - require:
       - sls: php

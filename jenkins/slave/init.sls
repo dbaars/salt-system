@@ -7,7 +7,9 @@ include:
   - php.php-unit
   - nodejs
   - npm
+  - npm.plugins
   - composer
+  - rpm-build
 
 Create swarm directory:
   file.directory:

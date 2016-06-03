@@ -11,25 +11,18 @@ include:
   - composer
   - rpm-build
 
-Create swarm directory:
-  file.directory:
-    - name: /opt/swarm
-    - user: root
-    - group: users
-    - dir_mode: 755
-
 Create swarm working directory:
   file.directory:
     - name: /opt/swarm
     - user: zjenkins
-    - group: unix-users
+    - group: users
     - dir_mode: 700
 
 /opt/swarm/swarm-client-latest.jar:
   file.managed:
     - source: salt://jenkins/slave/files/swarm-client-latest.jar
     - mode: 644
-    - user: root
+    - user: zjenkins
     - group: users
     - require:
       - file: /opt/swarm

@@ -4,7 +4,7 @@ After=opt.mount sssd.service network.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/java -jar /opt/swarm/swarm-client-latest.jar -description "A CI Slave" -executors 1 -fsroot /opt/swarm/zjenkins -labels "Linux swarm" -master {{ pillar['jenkins_master'] }} -name {{ grains['host'] }} -username {{ pillar['jenkins_user'] }} -password {{ pillar['jenkins_password'] }}
+ExecStart=/usr/bin/java -jar /opt/swarm/swarm-client-latest.jar -description "A CI Slave" -executors {{ grains['num_cpus'] }} -fsroot /opt/swarm/zjenkins -labels "Linux swarm" -master {{ pillar['jenkins_master'] }} -name {{ grains['host'] }} -username {{ pillar['jenkins_user'] }} -password {{ pillar['jenkins_password'] }}
 ExecStop=
 Restart=always
 RestartSec=10

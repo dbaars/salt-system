@@ -10,6 +10,7 @@ include:
   - npm.plugins
   - composer
   - rpm-build
+  - users.zjenkins
 
 Create swarm working directory:
   file.directory:

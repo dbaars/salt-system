@@ -37,7 +37,7 @@ swarm.service:
     - user: root
     - group: root
   module.wait:
-    - name: service.systemctl_restart
+    - name: service.systemctl_reload
     - watch:
       - file: /etc/systemd/system/swarm.service
   service.running:

@@ -14,6 +14,7 @@ npm_install_plugin_{{ plugin }}:
 
 npm_update_{{ plugin }}:
   cmd.run:
+    - unless: npm -g outdated {{ plugin }}
     - name: npm -g update {{ plugin }}
     - timeout: 120
     - require:

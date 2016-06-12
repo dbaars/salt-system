@@ -9,7 +9,7 @@ include:
 {% if key.startswith('https_vhost') %}
 include:
   - firewall.public.https_service
-{% endfor %}
+{% endif %}
   
 # Create the vhosts.d directory to store vhost conf files
 /etc/httpd/vhosts.d:

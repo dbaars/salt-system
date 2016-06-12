@@ -3,14 +3,13 @@
 # MUST have a valid certifiate in pillar value_cert and value_privatekey, where "value" is the FQDN of the website - e.g. cidev.niwa.local_cert and cidev.niwa.local_privatekey
 
 include:
-  - apache
-  - apache.mod_ssl
+  - webserver
 
 {% for key, value in pillar.items() if key.startswith('localrevproxy_') %}
 
 /etc/httpd/vhosts.d/{{ value }}.conf:
   file.managed:
-    - source: salt://webserver/vhosts/localrevproxy.template
+    - source: salt://webserver/vhosts/files/localrevproxy.template
     - template: jinja
     - defaults:
       vhost_val: {{ value }}
@@ -18,8 +17,7 @@ include:
     - user: root
     - group: root
     - require:
-      - pkg: apache
-      - pkg: mod_ssl
+      - pkg: httpd
     - watch_in:
       - module: apache-reload
 

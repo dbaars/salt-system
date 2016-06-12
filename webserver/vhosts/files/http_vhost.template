@@ -1,0 +1,19 @@
+<VirtualHost  *:80>
+    ServerName {{ vhost_val }}
+    ServerAlias www.{{ vhost_val }}
+    ServerAdmin webmaster@{{ vhost_val }}
+
+    AllowEncodedSlashes Off
+    LogLevel info
+    ErrorLog /var/log/httpd/{{ vhost_val }}-error.log
+    CustomLog /var/log/httpd/{{ vhost_val }}-access.log combined
+    DocumentRoot /var/www/html/vhosts/{{ vhost_val }}
+
+    <Directory "/var/www/html/vhosts/{{ vhost_val }}">
+        Options -Indexes +FollowSymlinks
+        Order allow,deny
+        Allow from all
+        AllowOverride None
+        Require all granted
+    </Directory>
+</VirtualHost>

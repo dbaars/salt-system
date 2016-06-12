@@ -6,6 +6,7 @@ include:
   - php.php-pgsql
   - users.jenkins
   - webserver.vhosts.vhost_create
+  - webserver.mod_ssl
   - firewalld.public.http_service
 
 # Install httpd

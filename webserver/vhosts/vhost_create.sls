@@ -6,10 +6,10 @@ include:
   - filesystem.www-vhosts.sls
 
 # Open HTTPS port if https_vhost pillar exists
-{% if key.startswith('https_vhost') %}
+{% for key, vhost_val in pillar.items() if key.startswith('https_vhost') %}
 include:
-  - firewall.public.https_service
-{% endif %}
+  - firewalld.public.https_service
+{% endfor %}
   
 # Create the vhosts.d directory to store vhost conf files
 /etc/httpd/vhosts.d:

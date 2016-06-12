@@ -4,9 +4,9 @@ include:
   - php
   - php.php-common
   - php.php-pgsql
-  - user.jenkins
+  - users.jenkins
   - webserver.vhosts.vhost_create
-  - firewall.public.http_service
+  - firewalld.public.http_service
 
 # Install httpd
 httpd:

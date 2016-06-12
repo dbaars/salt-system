@@ -10,7 +10,8 @@ include:
 
 # Install httpd
 httpd:
-  pkg.installed: []
+  pkg.installed:
+    - name: httpd
     - require_in:
       - pkg: webserver.mod_ssl
   service.running:

@@ -3,7 +3,7 @@
 
 include:
   - webserver
-  - filesystem.www-vhosts.sls
+  - filesystem.www-vhosts
 
 # Open HTTPS port if https_vhost pillar exists
 {% for key, vhost_val in pillar.items() if key.startswith('https_vhost') %}

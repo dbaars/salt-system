@@ -6,9 +6,23 @@ include:
   - filesystem.www-vhosts
 
 # Open HTTPS port if https_vhost pillar exists
+# Manage the ssl.conf configuration and default vhost file
 {% for key, vhost_val in pillar.items() if key.startswith('https_vhost') %}
 include:
   - firewalld.public.https_service
+
+# Create the default vhost file
+/etc/httpd/conf.d/ssl.conf:
+  file.managed:
+    - source: salt://webserver/vhosts/files/ssl.conf.template
+    - template: jinja
+    - mode: 644
+    - user: root
+    - group: root
+    - require:
+      - pkg: httpd
+    - watch_in:
+      - module: apache-reload
 {% endfor %}
   
 # Create the vhosts.d directory to store vhost conf files

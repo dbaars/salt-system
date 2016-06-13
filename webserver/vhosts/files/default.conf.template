@@ -1,34 +1,3 @@
 <VirtualHost _default_:80>
 Redirect 301 / http://www.niwa.co.nz
 </VirtualHost>
-
-<IfDefine SSL>
-<IfDefine !NOSSL>
-<IfModule ssl_module>
-
-<VirtualHost _default_:443>
-HostnameLookups Off
-UseCanonicalName Off
-ServerSignature Off
-
-#   SSL Engine Switch:
-#   Enable/Disable SSL for this virtual host.
-SSLEngine on
-Options Indexes FollowSymLinks
-SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
-
-SSLCertificateFile 			/etc/pki/tls/certs/{{ grains['fqdn'] }}.pem
-SSLCertificateKeyFile 		/etc/pki/tls/private/{{ grains['fqdn'] }}.pem
-SSLCACertificateFile      	/etc/pki/ca-trust/source/anchors/niwa_cacert.pem
-
-SetEnvIf User-Agent ".*MSIE.*" \
-         nokeepalive ssl-unclean-shutdown \
-         downgrade-1.0 force-response-1.0
-
-Redirect / https://www.niwa.co.nz
-
-</VirtualHost>
-</IfModule>
-
-</IfDefine>
-</IfDefine>

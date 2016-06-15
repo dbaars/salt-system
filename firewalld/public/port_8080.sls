@@ -10,7 +10,7 @@ public_8080:
 # What this means is that the service.running state will look for changes to the firewalld.present state 
 # and restart firewalld if changes occur
 
-firewalld_check_http:
+firewalld_check_8080:
   service.running:
     - name: firewalld
     - watch:

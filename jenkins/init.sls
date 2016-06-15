@@ -1,6 +1,6 @@
 include:
   - users.jenkins
-  - apache
+  - webserver
   - webserver.vhosts.revproxy_create
   - java
 

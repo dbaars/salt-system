@@ -65,6 +65,11 @@ include:
 # Create HTTP-only vhost
 ########################
 {% for key, vhost_val in pillar.items() if key.startswith('http_vhost') %}
+
+# Grab the name of the vhost (we need it to match other pillars later on)
+# E.g. This extracts 'ecwdbadmin' from a pillar called 'http_vhost_ecwdbadmin'
+{% set host=key.split('_')[2] %}
+
 /var/www/html/vhosts/{{ vhost_val }}:
   file.directory:
     - user: apache
@@ -81,6 +86,9 @@ include:
     - acl_name: jenkins
     - perms: rwx
     - recurse: True
+	
+# A quick for loop to extract the documentroot from pillar
+{% for key1, docroot in pillar.items() if (key1.startswith('documentroot') and (host in key1)) %}
 
 /etc/httpd/vhosts.d/{{ vhost_val}}.conf:
   file.managed:
@@ -88,6 +96,7 @@ include:
     - template: jinja
     - defaults:
       vhost_val: {{ vhost_val }}
+      docroot_val: {{ docroot }}
     - mode: 644
     - user: root
     - group: root
@@ -96,6 +105,7 @@ include:
     - watch_in:
       - module: apache-reload
 
+{% endfor %}
 {% endfor %}
 
 ####################

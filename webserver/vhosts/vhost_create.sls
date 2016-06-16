@@ -86,7 +86,7 @@ include:
     - acl_name: jenkins
     - perms: rwx
     - recurse: True
-	
+
 # A quick for loop to extract the documentroot from pillar
 {% for key1, docroot in pillar.items() if (key1.startswith('documentroot') and (host in key1)) %}
 
